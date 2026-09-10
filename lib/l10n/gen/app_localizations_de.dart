@@ -207,6 +207,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Zusammenfassung fehlgeschlagen — zum Wiederholen tippen';
 
   @override
+  String get cassetteSummaryFailed =>
+      'Kassetten-Zusammenfassung fehlgeschlagen — zum Wiederholen tippen';
+
+  @override
   String get transcribing => 'wird transkribiert…';
 
   @override

@@ -205,6 +205,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'özet oluşturulamadı — tekrar denemek için dokunun';
 
   @override
+  String get cassetteSummaryFailed =>
+      'kaset özeti başarısız — yeniden denemek için dokunun';
+
+  @override
   String get transcribing => 'yazıya dökülüyor…';
 
   @override

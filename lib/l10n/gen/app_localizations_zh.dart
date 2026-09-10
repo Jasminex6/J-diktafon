@@ -195,6 +195,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get summaryFailedRetry => '摘要失败，点按重试';
 
   @override
+  String get cassetteSummaryFailed => '卡带摘要生成失败 — 点按重试';
+
+  @override
   String get transcribing => '正在转写…';
 
   @override
@@ -801,6 +804,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get summaryFailedRetry => '摘要失敗，點一下重試';
+
+  @override
+  String get cassetteSummaryFailed => '卡帶摘要產生失敗 — 點按重試';
 
   @override
   String get transcribing => '轉錄中…';

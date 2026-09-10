@@ -207,6 +207,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get summaryFailedRetry => 'souhrn selhal — klepnutím to zkusíte znovu';
 
   @override
+  String get cassetteSummaryFailed =>
+      'shrnutí kazety selhalo — klepněte pro opakování';
+
+  @override
   String get transcribing => 'přepisuje se…';
 
   @override

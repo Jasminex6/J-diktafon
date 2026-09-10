@@ -212,6 +212,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'сводка не удалась — нажмите, чтобы повторить';
 
   @override
+  String get cassetteSummaryFailed =>
+      'не удалось суммировать кассету — нажмите, чтобы повторить';
+
+  @override
   String get transcribing => 'идёт расшифровка…';
 
   @override

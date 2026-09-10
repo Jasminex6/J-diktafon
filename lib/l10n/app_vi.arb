@@ -54,6 +54,7 @@
   "memoDivider": "Bản ghi {n} — {date}",
   "summarizing": "đang tóm tắt…",
   "summaryFailedRetry": "tóm tắt thất bại — nhấn để thử lại",
+  "cassetteSummaryFailed": "tóm tắt cassette thất bại — chạm để thử lại",
   "transcribing": "đang chép lời…",
 
   "settingsTitle": "CÀI ĐẶT",

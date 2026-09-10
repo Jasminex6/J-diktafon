@@ -196,6 +196,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get summaryFailedRetry => '요약 실패 — 눌러서 다시 시도';
 
   @override
+  String get cassetteSummaryFailed => '카세트 요약 실패 — 탭하여 재시도';
+
+  @override
   String get transcribing => '텍스트로 변환 중…';
 
   @override

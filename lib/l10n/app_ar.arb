@@ -54,6 +54,7 @@
   "memoDivider": "المذكرة {n} — {date}",
   "summarizing": "جارٍ التلخيص…",
   "summaryFailedRetry": "فشل التلخيص — انقر لإعادة المحاولة",
+  "cassetteSummaryFailed": "فشل ملخص الكاسيت — انقر لإعادة المحاولة",
   "transcribing": "جارٍ التفريغ…",
 
   "settingsTitle": "الإعدادات",

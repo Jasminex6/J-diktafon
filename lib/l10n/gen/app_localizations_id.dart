@@ -200,6 +200,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get summaryFailedRetry => 'ringkasan gagal — ketuk untuk mencoba lagi';
 
   @override
+  String get cassetteSummaryFailed =>
+      'ringkasan kaset gagal — ketuk untuk mencoba lagi';
+
+  @override
   String get transcribing => 'mentranskripsi…';
 
   @override

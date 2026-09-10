@@ -54,6 +54,7 @@
   "memoDivider": "メモ {n} — {date}",
   "summarizing": "要約中…",
   "summaryFailedRetry": "要約に失敗しました — タップで再試行",
+  "cassetteSummaryFailed": "カセットの要約に失敗しました — タップして再試行",
   "transcribing": "文字起こし中…",
 
   "settingsTitle": "設定",

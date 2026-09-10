@@ -54,6 +54,7 @@
   "memoDivider": "备忘 {n} — {date}",
   "summarizing": "正在生成摘要…",
   "summaryFailedRetry": "摘要失败，点按重试",
+  "cassetteSummaryFailed": "卡带摘要生成失败 — 点按重试",
   "transcribing": "正在转写…",
 
   "settingsTitle": "设置",

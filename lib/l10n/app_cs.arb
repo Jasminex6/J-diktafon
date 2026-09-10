@@ -54,6 +54,7 @@
   "memoDivider": "Záznam {n} — {date}",
   "summarizing": "vytváří se souhrn…",
   "summaryFailedRetry": "souhrn selhal — klepnutím to zkusíte znovu",
+  "cassetteSummaryFailed": "shrnutí kazety selhalo — klepněte pro opakování",
   "transcribing": "přepisuje se…",
 
   "settingsTitle": "NASTAVENÍ",

@@ -213,6 +213,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'podsumowanie nie powiodło się — dotknij, aby ponowić';
 
   @override
+  String get cassetteSummaryFailed =>
+      'podsumowanie kasety nie powiodło się — dotknij, aby ponowić';
+
+  @override
   String get transcribing => 'trwa transkrypcja…';
 
   @override

@@ -207,6 +207,10 @@ class AppLocalizationsIt extends AppLocalizations {
       'riassunto non riuscito — tocca per riprovare';
 
   @override
+  String get cassetteSummaryFailed =>
+      'riepilogo della cassetta non riuscito — tocca per riprovare';
+
+  @override
   String get transcribing => 'trascrizione in corso…';
 
   @override

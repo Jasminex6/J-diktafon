@@ -54,6 +54,7 @@
   "memoDivider": "Nota {n} — {date}",
   "summarizing": "resumiendo…",
   "summaryFailedRetry": "el resumen falló — toca para reintentar",
+  "cassetteSummaryFailed": "fallo en el resumen del casete — toca para reintentar",
   "transcribing": "transcribiendo…",
 
   "settingsTitle": "AJUSTES",

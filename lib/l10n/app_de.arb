@@ -54,6 +54,7 @@
   "memoDivider": "Memo {n} — {date}",
   "summarizing": "wird zusammengefasst…",
   "summaryFailedRetry": "Zusammenfassung fehlgeschlagen — zum Wiederholen tippen",
+  "cassetteSummaryFailed": "Kassetten-Zusammenfassung fehlgeschlagen — zum Wiederholen tippen",
   "transcribing": "wird transkribiert…",
 
   "settingsTitle": "EINSTELLUNGEN",

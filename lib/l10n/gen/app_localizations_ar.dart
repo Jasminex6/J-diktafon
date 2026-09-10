@@ -213,6 +213,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get summaryFailedRetry => 'فشل التلخيص — انقر لإعادة المحاولة';
 
   @override
+  String get cassetteSummaryFailed => 'فشل ملخص الكاسيت — انقر لإعادة المحاولة';
+
+  @override
   String get transcribing => 'جارٍ التفريغ…';
 
   @override

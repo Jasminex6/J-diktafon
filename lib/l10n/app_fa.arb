@@ -54,6 +54,7 @@
   "memoDivider": "یادداشت {n} — {date}",
   "summarizing": "در حال خلاصه‌سازی…",
   "summaryFailedRetry": "خلاصه‌سازی ناموفق بود — برای تلاش دوباره لمس کنید",
+  "cassetteSummaryFailed": "خلاصه‌ی کاست ناموفق بود — برای تلاش دوباره ضربه بزنید",
   "transcribing": "در حال رونویسی…",
 
   "settingsTitle": "تنظیمات",

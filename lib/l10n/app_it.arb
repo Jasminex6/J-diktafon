@@ -54,6 +54,7 @@
   "memoDivider": "Memo {n} — {date}",
   "summarizing": "riassunto in corso…",
   "summaryFailedRetry": "riassunto non riuscito — tocca per riprovare",
+  "cassetteSummaryFailed": "riepilogo della cassetta non riuscito — tocca per riprovare",
   "transcribing": "trascrizione in corso…",
 
   "settingsTitle": "IMPOSTAZIONI",

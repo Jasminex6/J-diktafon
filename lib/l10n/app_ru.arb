@@ -54,6 +54,7 @@
   "memoDivider": "Запись {n} — {date}",
   "summarizing": "составляется сводка…",
   "summaryFailedRetry": "сводка не удалась — нажмите, чтобы повторить",
+  "cassetteSummaryFailed": "не удалось суммировать кассету — нажмите, чтобы повторить",
   "transcribing": "идёт расшифровка…",
 
   "settingsTitle": "НАСТРОЙКИ",

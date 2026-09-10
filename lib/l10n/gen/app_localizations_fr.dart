@@ -206,6 +206,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get summaryFailedRetry => 'résumé échoué — touchez pour réessayer';
 
   @override
+  String get cassetteSummaryFailed =>
+      'échec du résumé de la cassette — touchez pour réessayer';
+
+  @override
   String get transcribing => 'transcription en cours…';
 
   @override

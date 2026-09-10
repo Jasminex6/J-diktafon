@@ -54,6 +54,7 @@
   "memoDivider": "Not {n} — {date}",
   "summarizing": "özetleniyor…",
   "summaryFailedRetry": "özet oluşturulamadı — tekrar denemek için dokunun",
+  "cassetteSummaryFailed": "kaset özeti başarısız — yeniden denemek için dokunun",
   "transcribing": "yazıya dökülüyor…",
 
   "settingsTitle": "AYARLAR",

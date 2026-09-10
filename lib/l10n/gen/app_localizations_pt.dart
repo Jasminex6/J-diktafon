@@ -207,6 +207,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'o resumo falhou — toque para tentar de novo';
 
   @override
+  String get cassetteSummaryFailed =>
+      'falha no resumo da cassete — toque para tentar novamente';
+
+  @override
   String get transcribing => 'transcrevendo…';
 
   @override

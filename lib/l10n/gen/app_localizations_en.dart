@@ -204,6 +204,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get summaryFailedRetry => 'summary failed — tap to retry';
 
   @override
+  String get cassetteSummaryFailed => 'cassette summary failed — tap to retry';
+
+  @override
   String get transcribing => 'transcribing…';
 
   @override

@@ -427,6 +427,12 @@ abstract class AppLocalizations {
   /// **'summary failed — tap to retry'**
   String get summaryFailedRetry;
 
+  /// No description provided for @cassetteSummaryFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'cassette summary failed — tap to retry'**
+  String get cassetteSummaryFailed;
+
   /// No description provided for @transcribing.
   ///
   /// In en, this message translates to:

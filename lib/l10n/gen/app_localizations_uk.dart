@@ -212,6 +212,10 @@ class AppLocalizationsUk extends AppLocalizations {
       'не вдалося скласти підсумок — натисніть, щоб повторити';
 
   @override
+  String get cassetteSummaryFailed =>
+      'не вдалося підсумувати касету — торкніться, щоб повторити';
+
+  @override
   String get transcribing => 'іде розшифровка…';
 
   @override

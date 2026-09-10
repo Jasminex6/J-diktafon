@@ -54,6 +54,7 @@
   "memoDivider": "Memo {n} — {date}",
   "summarizing": "meringkas…",
   "summaryFailedRetry": "ringkasan gagal — ketuk untuk mencoba lagi",
+  "cassetteSummaryFailed": "ringkasan kaset gagal — ketuk untuk mencoba lagi",
   "transcribing": "mentranskripsi…",
 
   "settingsTitle": "PENGATURAN",

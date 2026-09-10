@@ -54,6 +54,7 @@
   "memoDivider": "메모 {n} — {date}",
   "summarizing": "요약 중…",
   "summaryFailedRetry": "요약 실패 — 눌러서 다시 시도",
+  "cassetteSummaryFailed": "카세트 요약 실패 — 탭하여 재시도",
   "transcribing": "텍스트로 변환 중…",
 
   "settingsTitle": "설정",

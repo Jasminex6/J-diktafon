@@ -201,6 +201,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get summaryFailedRetry => 'tóm tắt thất bại — nhấn để thử lại';
 
   @override
+  String get cassetteSummaryFailed =>
+      'tóm tắt cassette thất bại — chạm để thử lại';
+
+  @override
   String get transcribing => 'đang chép lời…';
 
   @override

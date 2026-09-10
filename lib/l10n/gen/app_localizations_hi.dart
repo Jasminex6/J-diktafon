@@ -205,6 +205,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get summaryFailedRetry => 'सारांश विफल — दोबारा कोशिश के लिए टैप करें';
 
   @override
+  String get cassetteSummaryFailed =>
+      'कैसेट का सारांश विफल — पुनः प्रयास हेतु टैप करें';
+
+  @override
   String get transcribing => 'ट्रांसक्राइब हो रहा है…';
 
   @override

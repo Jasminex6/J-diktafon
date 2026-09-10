@@ -54,6 +54,7 @@
   "memoDivider": "備忘 {n} — {date}",
   "summarizing": "正在產生摘要…",
   "summaryFailedRetry": "摘要失敗，點一下重試",
+  "cassetteSummaryFailed": "卡帶摘要產生失敗 — 點按重試",
   "transcribing": "轉錄中…",
 
   "settingsTitle": "設定",

@@ -54,6 +54,7 @@
   "memoDivider": "Mémo {n} — {date}",
   "summarizing": "résumé en cours…",
   "summaryFailedRetry": "résumé échoué — touchez pour réessayer",
+  "cassetteSummaryFailed": "échec du résumé de la cassette — touchez pour réessayer",
   "transcribing": "transcription en cours…",
 
   "settingsTitle": "RÉGLAGES",

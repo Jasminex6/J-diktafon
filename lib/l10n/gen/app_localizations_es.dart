@@ -206,6 +206,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get summaryFailedRetry => 'el resumen falló — toca para reintentar';
 
   @override
+  String get cassetteSummaryFailed =>
+      'fallo en el resumen del casete — toca para reintentar';
+
+  @override
   String get transcribing => 'transcribiendo…';
 
   @override

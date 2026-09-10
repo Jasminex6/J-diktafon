@@ -206,6 +206,10 @@ class AppLocalizationsFa extends AppLocalizations {
       'خلاصه‌سازی ناموفق بود — برای تلاش دوباره لمس کنید';
 
   @override
+  String get cassetteSummaryFailed =>
+      'خلاصه‌ی کاست ناموفق بود — برای تلاش دوباره ضربه بزنید';
+
+  @override
   String get transcribing => 'در حال رونویسی…';
 
   @override

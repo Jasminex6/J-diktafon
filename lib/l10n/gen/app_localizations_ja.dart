@@ -195,6 +195,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get summaryFailedRetry => '要約に失敗しました — タップで再試行';
 
   @override
+  String get cassetteSummaryFailed => 'カセットの要約に失敗しました — タップして再試行';
+
+  @override
   String get transcribing => '文字起こし中…';
 
   @override
