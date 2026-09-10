@@ -623,4 +623,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Thu âm';
+
+  @override
+  String get notifPlaybackChannel => 'Phát lại';
 }

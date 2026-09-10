@@ -169,5 +169,6 @@
   "notifDownloading": "Đang tải {label}",
   "notifModelInstalled": "Đã cài {label}",
   "notifRecording": "Đang thu âm",
-  "notifRecordingChannel": "Thu âm"
+  "notifRecordingChannel": "Thu âm",
+  "notifPlaybackChannel": "Phát lại"
 }

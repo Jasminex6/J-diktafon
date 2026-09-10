@@ -169,5 +169,6 @@
   "notifDownloading": "{label} डाउनलोड हो रहा है",
   "notifModelInstalled": "{label} इंस्टॉल हो गया",
   "notifRecording": "रिकॉर्डिंग जारी है",
-  "notifRecordingChannel": "रिकॉर्डिंग"
+  "notifRecordingChannel": "रिकॉर्डिंग",
+  "notifPlaybackChannel": "प्लेबैक"
 }

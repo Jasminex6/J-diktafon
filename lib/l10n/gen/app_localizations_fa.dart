@@ -638,4 +638,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'ضبط';
+
+  @override
+  String get notifPlaybackChannel => 'پخش';
 }

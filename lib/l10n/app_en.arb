@@ -290,5 +290,6 @@
   "notifModelInstalled": "{label} installed",
   "@notifModelInstalled": {"placeholders": {"label": {"type": "String"}}},
   "notifRecording": "Recording memo",
-  "notifRecordingChannel": "Recording"
+  "notifRecordingChannel": "Recording",
+  "notifPlaybackChannel": "Playback"
 }

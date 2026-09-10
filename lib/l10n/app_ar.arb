@@ -169,5 +169,6 @@
   "notifDownloading": "جارٍ تنزيل {label}",
   "notifModelInstalled": "تم تثبيت {label}",
   "notifRecording": "جارٍ التسجيل",
-  "notifRecordingChannel": "التسجيل"
+  "notifRecordingChannel": "التسجيل",
+  "notifPlaybackChannel": "التشغيل"
 }

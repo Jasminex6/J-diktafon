@@ -169,5 +169,6 @@
   "notifDownloading": "{label} をダウンロード中",
   "notifModelInstalled": "{label} をインストールしました",
   "notifRecording": "録音中",
-  "notifRecordingChannel": "録音"
+  "notifRecordingChannel": "録音",
+  "notifPlaybackChannel": "再生"
 }

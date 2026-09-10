@@ -4,6 +4,7 @@
 /// through the OS" hand-off that `file_selector` lacks on both platforms.
 library;
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -46,23 +47,45 @@ Future<void> excludeFromIosBackup(String path) async {
 /// screen off (without it the OS feeds silence). Returns true when the
 /// service is up; false when Android rejected the start — the caller falls
 /// back to finalizing on backgrounding. The strings become the persistent
-/// notification (localized by the caller; a service can't reach gen-l10n).
-/// Android-only by design: iOS covers this with the `audio` background mode
-/// and desktop activities never pause.
+/// notification (localized by the caller; a service can't reach gen-l10n):
+/// [title]/[channelName] for the card itself, [stopLabel] for its STOP
+/// action. Android-only by design: iOS covers this with the `audio`
+/// background mode and desktop activities never pause.
 Future<bool> startRecordingForegroundService({
   required String title,
   required String channelName,
+  required String stopLabel,
 }) async {
   if (!Platform.isAndroid) return false;
   try {
     final started = await _channel.invokeMethod<bool>('startRecordingService', {
       'title': title,
       'channelName': channelName,
+      'stopLabel': stopLabel,
     });
     return started ?? false;
   } on PlatformException {
     return false;
   }
+}
+
+/// The recording notification's STOP action, delivered as a stream: each
+/// event is one tap on the card while the app is backgrounded. The platform
+/// side invokes `stopRecording` on the `diktafon/recording_events` channel.
+/// One app-lifetime broadcast stream — a single handler serves every
+/// capture, so taps can never get lost to a re-subscribe race.
+Stream<void>? _recordingStops;
+Stream<void> recordingStopRequests() {
+  if (!Platform.isAndroid) return const Stream.empty();
+  return _recordingStops ??= () {
+    const channel = MethodChannel('diktafon/recording_events');
+    final controller = StreamController<void>.broadcast();
+    channel.setMethodCallHandler((call) async {
+      if (call.method == 'stopRecording') controller.add(null);
+      return null;
+    });
+    return controller.stream;
+  }();
 }
 
 /// Tears the recording service (and its notification) down — call on every

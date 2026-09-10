@@ -595,4 +595,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => '녹음';
+
+  @override
+  String get notifPlaybackChannel => '재생';
 }

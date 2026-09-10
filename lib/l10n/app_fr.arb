@@ -169,5 +169,6 @@
   "notifDownloading": "Téléchargement de {label}",
   "notifModelInstalled": "{label} installé",
   "notifRecording": "Enregistrement en cours",
-  "notifRecordingChannel": "Enregistrement"
+  "notifRecordingChannel": "Enregistrement",
+  "notifPlaybackChannel": "Lecture"
 }

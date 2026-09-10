@@ -610,4 +610,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => '録音';
+
+  @override
+  String get notifPlaybackChannel => '再生';
 }

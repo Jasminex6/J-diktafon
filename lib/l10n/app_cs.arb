@@ -169,5 +169,6 @@
   "notifDownloading": "Stahuje se {label}",
   "notifModelInstalled": "{label} — nainstalováno",
   "notifRecording": "Probíhá nahrávání",
-  "notifRecordingChannel": "Nahrávání"
+  "notifRecordingChannel": "Nahrávání",
+  "notifPlaybackChannel": "Přehrávání"
 }

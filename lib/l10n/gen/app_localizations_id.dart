@@ -623,4 +623,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Perekaman';
+
+  @override
+  String get notifPlaybackChannel => 'Pemutaran';
 }

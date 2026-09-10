@@ -639,4 +639,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Enregistrement';
+
+  @override
+  String get notifPlaybackChannel => 'Lecture';
 }

@@ -636,4 +636,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Kayıt';
+
+  @override
+  String get notifPlaybackChannel => 'Oynatma';
 }

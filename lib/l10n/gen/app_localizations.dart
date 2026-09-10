@@ -1086,6 +1086,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recording'**
   String get notifRecordingChannel;
+
+  /// No description provided for @notifPlaybackChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback'**
+  String get notifPlaybackChannel;
 }
 
 class _AppLocalizationsDelegate

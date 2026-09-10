@@ -674,4 +674,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Запись';
+
+  @override
+  String get notifPlaybackChannel => 'Воспроизведение';
 }

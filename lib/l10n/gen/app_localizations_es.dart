@@ -640,4 +640,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Grabación';
+
+  @override
+  String get notifPlaybackChannel => 'Reproducción';
 }

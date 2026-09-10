@@ -69,6 +69,15 @@ class _CassetteScreenState extends ConsumerState<CassetteScreen>
         ),
       );
     });
+    // M1: the media notification names the cassette being played — keep the
+    // session's title in sync while this screen is what loaded the tape.
+    ref.listenManual(
+      cassetteProvider(widget.cassetteId),
+      (_, next) => ref
+          .read(playbackMediaHandlerProvider)
+          ?.setNowPlaying(next.value?.label),
+      fireImmediately: true,
+    );
   }
 
   @override
@@ -110,17 +119,14 @@ class _CassetteScreenState extends ConsumerState<CassetteScreen>
 
   @override
   void deactivate() {
-    // M1 has no lock-screen controls yet: leaving the cassette stops the
-    // session. An in-flight recording is finalized, never lost (§14) — and
-    // a start still waiting on the permission prompt is abandoned, so a
-    // late grant can't begin a headless capture.
-    final notifier = ref.read(recordingControllerProvider.notifier);
-    notifier.abortStartIn(widget.cassetteId);
-    final recording = ref.read(recordingControllerProvider);
-    if (recording.isRecordingIn(widget.cassetteId)) {
-      unawaited(notifier.stop());
-    }
-    unawaited(ref.read(tapePlayerProvider).pause());
+    // M1 (background-first): playback and capture now live in their own
+    // foreground sessions — leaving the cassette screen (or the app) no
+    // longer stops them; the media/mic notifications carry the controls.
+    // A start still waiting on the permission prompt is abandoned, so a
+    // late grant can't begin a headless capture (§14).
+    ref
+        .read(recordingControllerProvider.notifier)
+        .abortStartIn(widget.cassetteId);
     super.deactivate();
   }
 

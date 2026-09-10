@@ -674,4 +674,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get notifRecordingChannel => 'Nagrywanie';
+
+  @override
+  String get notifPlaybackChannel => 'Odtwarzanie';
 }
