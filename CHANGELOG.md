@@ -3,6 +3,36 @@
 All notable changes to Diktafon are documented in this file. Versions
 correspond to git tags (`v*`); dates are tag dates.
 
+## [Unreleased]
+
+### Added
+- **Background playback with media controls** (Android/iOS) — playback now
+  runs in a proper media session: a system media notification (Android) or
+  lock-screen/Control Center controls (iOS) with play/pause, a seek bar
+  over the whole tape, and skip between memos. Audio keeps playing with
+  the screen off or the app swiped away, like any music player. The
+  recording notification gained a Stop button that finalizes the memo
+  without reopening the app.
+
+### Changed
+- Leaving the cassette screen no longer pauses playback or stops a running
+  recording — both continue in the background with their notifications;
+  the in-app deck remains the primary control surface.
+
+### Fixed
+- Transcript scrolling jank and device heating on Android: the cassette
+  screen rebuilt entirely on every playback tick (5–10×/second) and every
+  visible paragraph reallocated a gesture recognizer per word; the screen
+  now rebuilds in small scoped widgets, word spans are cached per memo,
+  each memo repaints independently, and transcript JSON decodes off the
+  UI isolate. Long transcripts no longer freeze frames while scrolling.
+- Summaries failing silently: a native llama.cpp crash used to leave
+  memos hanging on "summarizing…" forever with no log output. Worker
+  crashes now fail the job immediately (the queue retries), a wedged
+  generate times out after 5 minutes, every failure is visible in logcat
+  (`[dk_jobs]` / `[dk_llm]` — see `doc/ANDROID.md`), and a failed
+  cassette overview announces itself with a tappable retry.
+
 ## [1.0.9] — 2026-07-30
 
 ### Added
