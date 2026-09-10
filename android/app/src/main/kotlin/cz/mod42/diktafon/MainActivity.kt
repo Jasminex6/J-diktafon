@@ -1,6 +1,9 @@
 package cz.mod42.diktafon
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.AudioFormat
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
@@ -8,11 +11,12 @@ import android.media.MediaExtractor
 import android.media.MediaFormat
 import android.media.MediaMuxer
 import android.net.Uri
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import androidx.core.content.ContextCompat
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.BufferedOutputStream
@@ -24,7 +28,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.concurrent.Executors
 
-class MainActivity : FlutterActivity() {
+class MainActivity : AudioServiceActivity() {
     private companion object {
         // Outside the ranges Flutter plugins use for their own picks.
         const val SAVE_DOCUMENT_REQUEST = 7461
@@ -38,8 +42,31 @@ class MainActivity : FlutterActivity() {
     private var pendingSaveResult: MethodChannel.Result? = null
     private var pendingSaveSource: String? = null
 
+    // The recording notification's STOP action → Dart ("stopRecording" on
+    // diktafon/recording_events). Registered with the engine, so it lives
+    // as long as the Flutter process does.
+    private var recordingEventsChannel: MethodChannel? = null
+
+    private val stopRecordingReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            recordingEventsChannel?.invokeMethod("stopRecording", null)
+        }
+    }
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        recordingEventsChannel = MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger, "diktafon/recording_events")
+        if (Build.VERSION.SDK_INT >= 33) {
+            registerReceiver(
+                stopRecordingReceiver,
+                IntentFilter(RecordingForegroundService.ACTION_STOP_RECORDING),
+                ContextCompat.RECEIVER_NOT_EXPORTED)
+        } else {
+            registerReceiver(
+                stopRecordingReceiver,
+                IntentFilter(RecordingForegroundService.ACTION_STOP_RECORDING))
+        }
         // Counterpart of MediaCodecPcmDecoder (lib/services/audio/pcm_decoder.dart):
         // decodes a memo file to raw f32le 16 kHz mono PCM for whisper.
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "diktafon/pcm_decoder")
@@ -86,7 +113,8 @@ class MainActivity : FlutterActivity() {
                     // the start; Dart then falls back to finalize-on-pause.
                     "startRecordingService" -> result.success(
                         startRecordingService(call.argument("title"),
-                            call.argument("channelName")))
+                            call.argument("channelName"),
+                            call.argument("stopLabel")))
                     "stopRecordingService" -> {
                         stopService(Intent(this, RecordingForegroundService::class.java))
                         result.success(null)
@@ -120,13 +148,15 @@ class MainActivity : FlutterActivity() {
             }
     }
 
-    private fun startRecordingService(title: String?, channelName: String?): Boolean {
+    private fun startRecordingService(
+        title: String?, channelName: String?, stopLabel: String?): Boolean {
         return try {
             ContextCompat.startForegroundService(
                 this,
                 Intent(this, RecordingForegroundService::class.java).apply {
                     putExtra(RecordingForegroundService.EXTRA_TITLE, title)
                     putExtra(RecordingForegroundService.EXTRA_CHANNEL_NAME, channelName)
+                    putExtra(RecordingForegroundService.EXTRA_STOP_LABEL, stopLabel)
                 })
             true
         } catch (e: Exception) {
