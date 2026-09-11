@@ -75,6 +75,13 @@ android {
     }
 
     buildTypes {
+        // Debug installs land next to the store/F-Droid release as a second
+        // app ("Diktafon dev") — same engine, own data dir, so testing never
+        // touches a real library. Release keeps the plain applicationId.
+        debug {
+            applicationIdSuffix = ".dev"
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
