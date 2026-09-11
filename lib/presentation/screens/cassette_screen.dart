@@ -298,7 +298,10 @@ class _CassetteScreenState extends ConsumerState<CassetteScreen>
                             currentMemoIndex: playback.memoIndex,
                             playing: playback.playing,
                             seekCount: playback.seekCount,
-                            modelReady: _modelReady(),
+                            // modelReady watches are scoped to this subtree:
+                            // model-state changes (a download's progress
+                            // ticks) must not rebuild the whole screen.
+                            modelReady: _modelReady(ref),
                             onSeekGlobalMs: (ms) => player.seekGlobal(ms),
                             onRetryMemo: (memoId) => ref
                                 .read(jobQueueProvider)
@@ -324,7 +327,9 @@ class _CassetteScreenState extends ConsumerState<CassetteScreen>
 
   /// Is the selected transcription tier provisioned? Decides the caption an
   /// untranscribed memo shows (§14 guides the user to Settings → Models).
-  bool _modelReady() {
+  /// Takes the caller's [WidgetRef] so the watches land on the smallest
+  /// enclosing rebuild scope, not the whole screen.
+  bool _modelReady(WidgetRef ref) {
     final tier =
         (ref.watch(settingsProvider).value ?? const AppSettings()).whisperTier;
     final states = ref.watch(whisperModelStatesProvider).value;
