@@ -53,6 +53,20 @@ android {
                 abiFilters += listOf("arm64-v8a", "x86_64")
             }
         }
+        // Debug APKs must behave like the release ones: the vendored engines'
+        // internal asserts are compiled out by NDEBUG in release, and at
+        // least one (ggml's sgemm "ldb >= k" on the Silero VAD path) aborts
+        // the process on real inputs a debug build then can't survive.
+        // (This replaces CMake's default debug flags, dropping -g — fine
+        // for an on-device testing build.)
+        externalNativeBuild {
+            cmake {
+                arguments += listOf(
+                    "-DCMAKE_C_FLAGS_DEBUG=-DNDEBUG",
+                    "-DCMAKE_CXX_FLAGS_DEBUG=-DNDEBUG",
+                )
+            }
+        }
     }
 
     // libdiktafon_whisper.so — whisper.cpp behind the dk_whisper shim
