@@ -3,7 +3,10 @@
 All notable changes to Diktafon are documented in this file. Versions
 correspond to git tags (`v*`); dates are tag dates.
 
-## [Unreleased]
+## [1.0.10] — 2026-09-11
+
+Fork build (Jasminex6): performance, background controls, summaries diagnostics and
+model import on top of upstream 1.0.9. Distributed as a sideloaded APK.
 
 ### Added
 - **Import models from a file** (Settings → Models) — both model pickers
