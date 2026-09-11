@@ -216,6 +216,24 @@ class AppLocalizationsRu extends AppLocalizations {
       'не удалось суммировать кассету — нажмите, чтобы повторить';
 
   @override
+  String get importModel => 'Импортировать из файла';
+
+  @override
+  String get importingModel => 'Проверка файла…';
+
+  @override
+  String modelImported(String label) {
+    return '$label импортирована';
+  }
+
+  @override
+  String get importNoMatch =>
+      'Этот файл не соответствует ни одной известной модели';
+
+  @override
+  String get modelImportFailed => 'Не удалось импортировать';
+
+  @override
   String get transcribing => 'идёт расшифровка…';
 
   @override

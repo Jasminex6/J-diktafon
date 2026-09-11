@@ -207,6 +207,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cassetteSummaryFailed => 'cassette summary failed — tap to retry';
 
   @override
+  String get importModel => 'Import from file';
+
+  @override
+  String get importingModel => 'Verifying file…';
+
+  @override
+  String modelImported(String label) {
+    return '$label imported';
+  }
+
+  @override
+  String get importNoMatch => 'This file does not match any known model';
+
+  @override
+  String get modelImportFailed => 'Import failed';
+
+  @override
   String get transcribing => 'transcribing…';
 
   @override

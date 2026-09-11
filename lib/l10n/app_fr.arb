@@ -55,6 +55,12 @@
   "summarizing": "résumé en cours…",
   "summaryFailedRetry": "résumé échoué — touchez pour réessayer",
   "cassetteSummaryFailed": "échec du résumé de la cassette — touchez pour réessayer",
+  "importModel": "Importer depuis un fichier",
+  "importingModel": "Vérification du fichier…",
+  "modelImported": "{label} importé",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "Ce fichier ne correspond à aucun modèle connu",
+  "modelImportFailed": "Échec de l’importation",
   "transcribing": "transcription en cours…",
 
   "settingsTitle": "RÉGLAGES",

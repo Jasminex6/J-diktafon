@@ -210,6 +210,23 @@ class AppLocalizationsFa extends AppLocalizations {
       'خلاصه‌ی کاست ناموفق بود — برای تلاش دوباره ضربه بزنید';
 
   @override
+  String get importModel => 'وارد کردن از فایل';
+
+  @override
+  String get importingModel => 'در حال بررسی فایل…';
+
+  @override
+  String modelImported(String label) {
+    return '$label وارد شد';
+  }
+
+  @override
+  String get importNoMatch => 'این فایل با هیچ مدل شناخته‌شده‌ای مطابقت ندارد';
+
+  @override
+  String get modelImportFailed => 'وارد کردن ناموفق بود';
+
+  @override
   String get transcribing => 'در حال رونویسی…';
 
   @override

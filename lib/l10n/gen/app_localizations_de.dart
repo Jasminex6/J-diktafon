@@ -211,6 +211,23 @@ class AppLocalizationsDe extends AppLocalizations {
       'Kassetten-Zusammenfassung fehlgeschlagen — zum Wiederholen tippen';
 
   @override
+  String get importModel => 'Aus Datei importieren';
+
+  @override
+  String get importingModel => 'Datei wird geprüft…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importiert';
+  }
+
+  @override
+  String get importNoMatch => 'Diese Datei passt zu keinem bekannten Modell';
+
+  @override
+  String get modelImportFailed => 'Import fehlgeschlagen';
+
+  @override
   String get transcribing => 'wird transkribiert…';
 
   @override

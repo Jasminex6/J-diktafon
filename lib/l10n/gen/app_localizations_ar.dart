@@ -216,6 +216,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cassetteSummaryFailed => 'فشل ملخص الكاسيت — انقر لإعادة المحاولة';
 
   @override
+  String get importModel => 'استيراد من ملف';
+
+  @override
+  String get importingModel => 'جارٍ التحقق من الملف…';
+
+  @override
+  String modelImported(String label) {
+    return 'تم استيراد $label';
+  }
+
+  @override
+  String get importNoMatch => 'لا يطابق هذا الملف أي نموذج معروف';
+
+  @override
+  String get modelImportFailed => 'فشل الاستيراد';
+
+  @override
   String get transcribing => 'جارٍ التفريغ…';
 
   @override

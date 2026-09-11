@@ -55,6 +55,12 @@
   "summarizing": "складається підсумок…",
   "summaryFailedRetry": "не вдалося скласти підсумок — натисніть, щоб повторити",
   "cassetteSummaryFailed": "не вдалося підсумувати касету — торкніться, щоб повторити",
+  "importModel": "Імпортувати з файла",
+  "importingModel": "Перевірка файла…",
+  "modelImported": "{label} імпортовано",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "Цей файл не відповідає жодній відомій моделі",
+  "modelImportFailed": "Імпорт не вдався",
   "transcribing": "іде розшифровка…",
 
   "settingsTitle": "НАЛАШТУВАННЯ",

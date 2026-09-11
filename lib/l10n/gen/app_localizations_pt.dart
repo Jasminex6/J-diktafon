@@ -211,6 +211,24 @@ class AppLocalizationsPt extends AppLocalizations {
       'falha no resumo da cassete — toque para tentar novamente';
 
   @override
+  String get importModel => 'Importar de arquivo';
+
+  @override
+  String get importingModel => 'Verificando arquivo…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importado';
+  }
+
+  @override
+  String get importNoMatch =>
+      'Este arquivo não corresponde a nenhum modelo conhecido';
+
+  @override
+  String get modelImportFailed => 'Falha na importação';
+
+  @override
   String get transcribing => 'transcrevendo…';
 
   @override

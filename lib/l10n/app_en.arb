@@ -101,6 +101,12 @@
   "summarizing": "summarising…",
   "summaryFailedRetry": "summary failed — tap to retry",
   "cassetteSummaryFailed": "cassette summary failed — tap to retry",
+  "importModel": "Import from file",
+  "importingModel": "Verifying file…",
+  "modelImported": "{label} imported",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "This file does not match any known model",
+  "modelImportFailed": "Import failed",
   "transcribing": "transcribing…",
 
   "settingsTitle": "SETTINGS",

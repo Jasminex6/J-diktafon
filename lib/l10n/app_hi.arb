@@ -55,6 +55,12 @@
   "summarizing": "सारांश बन रहा है…",
   "summaryFailedRetry": "सारांश विफल — दोबारा कोशिश के लिए टैप करें",
   "cassetteSummaryFailed": "कैसेट का सारांश विफल — पुनः प्रयास हेतु टैप करें",
+  "importModel": "फ़ाइल से आयात करें",
+  "importingModel": "फ़ाइल सत्यापित हो रही है…",
+  "modelImported": "{label} आयातित",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "यह फ़ाइल किसी ज्ञात मॉडल से मेल नहीं खाती",
+  "modelImportFailed": "आयात विफल",
   "transcribing": "ट्रांसक्राइब हो रहा है…",
 
   "settingsTitle": "सेटिंग्स",

@@ -55,6 +55,12 @@
   "summarizing": "جارٍ التلخيص…",
   "summaryFailedRetry": "فشل التلخيص — انقر لإعادة المحاولة",
   "cassetteSummaryFailed": "فشل ملخص الكاسيت — انقر لإعادة المحاولة",
+  "importModel": "استيراد من ملف",
+  "importingModel": "جارٍ التحقق من الملف…",
+  "modelImported": "تم استيراد {label}",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "لا يطابق هذا الملف أي نموذج معروف",
+  "modelImportFailed": "فشل الاستيراد",
   "transcribing": "جارٍ التفريغ…",
 
   "settingsTitle": "الإعدادات",

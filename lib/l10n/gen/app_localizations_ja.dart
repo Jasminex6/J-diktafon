@@ -198,6 +198,23 @@ class AppLocalizationsJa extends AppLocalizations {
   String get cassetteSummaryFailed => 'カセットの要約に失敗しました — タップして再試行';
 
   @override
+  String get importModel => 'ファイルから取り込む';
+
+  @override
+  String get importingModel => 'ファイルを確認しています…';
+
+  @override
+  String modelImported(String label) {
+    return '$label を取り込みました';
+  }
+
+  @override
+  String get importNoMatch => 'このファイルは既知のモデルと一致しません';
+
+  @override
+  String get modelImportFailed => '読み込みに失敗しました';
+
+  @override
   String get transcribing => '文字起こし中…';
 
   @override

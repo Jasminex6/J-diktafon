@@ -204,6 +204,23 @@ class AppLocalizationsId extends AppLocalizations {
       'ringkasan kaset gagal — ketuk untuk mencoba lagi';
 
   @override
+  String get importModel => 'Impor dari berkas';
+
+  @override
+  String get importingModel => 'Memverifikasi berkas…';
+
+  @override
+  String modelImported(String label) {
+    return '$label diimpor';
+  }
+
+  @override
+  String get importNoMatch => 'Berkas ini tidak cocok dengan model mana pun';
+
+  @override
+  String get modelImportFailed => 'Impor gagal';
+
+  @override
   String get transcribing => 'mentranskripsi…';
 
   @override

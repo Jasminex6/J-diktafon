@@ -211,6 +211,24 @@ class AppLocalizationsIt extends AppLocalizations {
       'riepilogo della cassetta non riuscito — tocca per riprovare';
 
   @override
+  String get importModel => 'Importa da file';
+
+  @override
+  String get importingModel => 'Verifica del file…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importato';
+  }
+
+  @override
+  String get importNoMatch =>
+      'Questo file non corrisponde a nessun modello noto';
+
+  @override
+  String get modelImportFailed => 'Importazione non riuscita';
+
+  @override
   String get transcribing => 'trascrizione in corso…';
 
   @override

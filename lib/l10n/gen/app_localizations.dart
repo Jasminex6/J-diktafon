@@ -433,6 +433,36 @@ abstract class AppLocalizations {
   /// **'cassette summary failed — tap to retry'**
   String get cassetteSummaryFailed;
 
+  /// No description provided for @importModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from file'**
+  String get importModel;
+
+  /// No description provided for @importingModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying file…'**
+  String get importingModel;
+
+  /// No description provided for @modelImported.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} imported'**
+  String modelImported(String label);
+
+  /// No description provided for @importNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'This file does not match any known model'**
+  String get importNoMatch;
+
+  /// No description provided for @modelImportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Import failed'**
+  String get modelImportFailed;
+
   /// No description provided for @transcribing.
   ///
   /// In en, this message translates to:

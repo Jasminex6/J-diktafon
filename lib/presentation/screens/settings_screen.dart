@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -378,7 +379,32 @@ class ModelPickerDialog extends ConsumerWidget {
       installedBytes: manager.installedBytes(),
       onSelect: (state) => _select(context, ref, state),
       onDelete: (state) => manager.delete(state.model as WhisperModel),
+      onImport: () => _import(context, ref, manager),
     );
+  }
+
+  /// Installs a model from a file the user picks (Downloads, a copy kept
+  /// across reinstalls, …) — identified by checksum, no network involved.
+  Future<void> _import(BuildContext context, WidgetRef ref,
+      WhisperModelManager manager) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    final file = await _pickModelFile(messenger);
+    if (file == null) return;
+    messenger.showSnackBar(SnackBar(content: Text(l10n.importingModel)));
+    try {
+      final model = await manager.importFromFile(file.path);
+      if (model == null) {
+        messenger.showSnackBar(SnackBar(content: Text(l10n.importNoMatch)));
+        return;
+      }
+      messenger.showSnackBar(SnackBar(
+        content: Text(l10n.modelImported(model.label)),
+      ));
+      await ref.read(jobQueueProvider).drain();
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.modelImportFailed)));
+    }
   }
 
   Future<void> _select(BuildContext context, WidgetRef ref,
@@ -440,7 +466,34 @@ class LlmModelPickerDialog extends ConsumerWidget {
           ref.read(settingsRepositoryProvider).setSummariesEnabled(false),
       onSelect: (state) => _select(context, ref, state),
       onDelete: (state) => manager.delete(state.model as LlmModel),
+      onImport: () => _import(context, ref, manager),
     );
+  }
+
+  /// Installs a model from a file the user picks (Downloads, a copy kept
+  /// across reinstalls, …) — identified by checksum, no network involved.
+  Future<void> _import(
+      BuildContext context, WidgetRef ref, LlmModelManager manager) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    final file = await _pickModelFile(messenger);
+    if (file == null) return;
+    messenger.showSnackBar(SnackBar(content: Text(l10n.importingModel)));
+    try {
+      final model = await manager.importFromFile(file.path);
+      if (model == null) {
+        messenger.showSnackBar(SnackBar(content: Text(l10n.importNoMatch)));
+        return;
+      }
+      messenger.showSnackBar(SnackBar(
+        content: Text(l10n.modelImported(model.label)),
+      ));
+      // A model landing releases parked summary jobs, same as a download.
+      await ref.read(settingsRepositoryProvider).setSummariesEnabled(true);
+      await ref.read(jobQueueProvider).drain();
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.modelImportFailed)));
+    }
   }
 
   Future<void> _select(BuildContext context, WidgetRef ref,
@@ -470,6 +523,20 @@ class LlmModelPickerDialog extends ConsumerWidget {
 /// model-missing recovery). Selecting a tier cancels any other tier still
 /// downloading (§5.6) — the cancelled/paused future stays silent here, only
 /// real failures earn the snackbar.
+
+/// SAF/file pick for the import affordance: any file goes — the checksum
+/// decides which model it is, so extensions stay unfiltered.
+Future<XFile?> _pickModelFile(ScaffoldMessengerState messenger) async {
+  try {
+    return await openFile(acceptedTypeGroups: const [
+      XTypeGroup(label: 'model'),
+    ]);
+  } catch (_) {
+    // The picker itself failed (no file app responded, plugin hiccup).
+    // messenger is still mounted here — the dialog stays open underneath.
+    return null;
+  }
+}
 Future<void> downloadAndDrain(
   ScaffoldMessengerState messenger,
   WidgetRef ref,
@@ -512,6 +579,7 @@ class _EnginePickerDialog extends ConsumerWidget {
     this.offDescription,
     this.offSelected = false,
     this.onOff,
+    this.onImport,
   });
 
   final String title;
@@ -524,6 +592,10 @@ class _EnginePickerDialog extends ConsumerWidget {
   final int installedBytes;
   final void Function(ModelState<ModelSpec>) onSelect;
   final void Function(ModelState<ModelSpec>) onDelete;
+
+  /// Set → an "import from file" row trails the catalog: install a model
+  /// from a checksum-identified file already on the device, no download.
+  final VoidCallback? onImport;
 
   /// Device-aware copy override; null → the catalog description.
   final String Function(ModelSpec)? descriptionOf;
@@ -574,6 +646,18 @@ class _EnginePickerDialog extends ConsumerWidget {
                     state.status == ModelStatus.paused
                 ? () => onDelete(state)
                 : null,
+          ),
+        if (onImport != null)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 6, 24, 0),
+            child: OutlinedButton.icon(
+              onPressed: onImport,
+              icon: const Icon(Icons.file_open_outlined, size: 18),
+              label: Text(
+                context.l10n.importModel,
+                style: const TextStyle(fontSize: 12.5),
+              ),
+            ),
           ),
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 10, 24, 0),

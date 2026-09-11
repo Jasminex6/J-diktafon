@@ -210,6 +210,23 @@ class AppLocalizationsFr extends AppLocalizations {
       'échec du résumé de la cassette — touchez pour réessayer';
 
   @override
+  String get importModel => 'Importer depuis un fichier';
+
+  @override
+  String get importingModel => 'Vérification du fichier…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importé';
+  }
+
+  @override
+  String get importNoMatch => 'Ce fichier ne correspond à aucun modèle connu';
+
+  @override
+  String get modelImportFailed => 'Échec de l’importation';
+
+  @override
   String get transcribing => 'transcription en cours…';
 
   @override

@@ -198,6 +198,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cassetteSummaryFailed => '卡带摘要生成失败 — 点按重试';
 
   @override
+  String get importModel => '从文件导入';
+
+  @override
+  String get importingModel => '正在校验文件…';
+
+  @override
+  String modelImported(String label) {
+    return '已导入 $label';
+  }
+
+  @override
+  String get importNoMatch => '此文件与任何已知模型都不匹配';
+
+  @override
+  String get modelImportFailed => '导入失败';
+
+  @override
   String get transcribing => '正在转写…';
 
   @override
@@ -807,6 +824,23 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get cassetteSummaryFailed => '卡帶摘要產生失敗 — 點按重試';
+
+  @override
+  String get importModel => '從檔案匯入';
+
+  @override
+  String get importingModel => '正在校驗檔案…';
+
+  @override
+  String modelImported(String label) {
+    return '已匯入 $label';
+  }
+
+  @override
+  String get importNoMatch => '此檔案與任何已知模型都不相符';
+
+  @override
+  String get modelImportFailed => '匯入失敗';
 
   @override
   String get transcribing => '轉錄中…';

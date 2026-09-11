@@ -211,6 +211,23 @@ class AppLocalizationsCs extends AppLocalizations {
       'shrnutí kazety selhalo — klepněte pro opakování';
 
   @override
+  String get importModel => 'Importovat ze souboru';
+
+  @override
+  String get importingModel => 'Ověřuje se soubor…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importován';
+  }
+
+  @override
+  String get importNoMatch => 'Tento soubor neodpovídá žádnému známému modelu';
+
+  @override
+  String get modelImportFailed => 'Import se nezdařil';
+
+  @override
   String get transcribing => 'přepisuje se…';
 
   @override

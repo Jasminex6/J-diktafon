@@ -27,11 +27,31 @@ unused apps to sleep" is aggressive on Samsung).
 Summaries need three things, checked in this order:
 
 1. **Settings → Summaries** must not be "No summaries" (`summariesEnabled`).
-2. The **LLM model must be downloaded** — Settings → Models → Summary. The
+2. The **LLM model must be installed** — Settings → Models → Summary. The
    default (Qwen3 1.7B, ~1.7 GB) downloads over Wi-Fi; the download progress
    mirrors into the notification area.
 3. Memos only get a gist when the transcript is longer than ~117 estimated
    tokens (§6.7) — short memos are their own summary by design.
+
+### Reusing model files (no re-downloading)
+
+Android sandboxes each app id into its own private storage, so a reinstall —
+or a debug build (`cz.mod42.diktafon.dev`) next to the store app — starts
+with an empty model store and would re-download gigabytes. To avoid that,
+keep a permanent copy of the model files in a folder on the phone (e.g.
+`Download/DiktafonModels`) and use the **"Import from file"** button at the
+bottom of both Settings model pickers:
+
+- The file is identified by its **checksum alone** — name and location don't
+  matter; a wrong or corrupt file is rejected with a clear message.
+- After importing, tap the model row as usual to select the tier; parked
+  jobs resume without a download.
+- To stock the folder once: let any install download the models, then copy
+  the files out of `/Android/data/cz.mod42.diktafon/files/models/**` with
+  the phone's file manager (or `adb pull`) into `Download/DiktafonModels`.
+
+Whisper models are `.bin` ggml files (e.g. `ggml-small.bin`); summary
+models are `.gguf` (e.g. `Qwen3-1.7B-Q8_0.gguf`).
 
 ### Reading the logs
 

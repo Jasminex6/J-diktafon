@@ -210,6 +210,24 @@ class AppLocalizationsEs extends AppLocalizations {
       'fallo en el resumen del casete — toca para reintentar';
 
   @override
+  String get importModel => 'Importar desde archivo';
+
+  @override
+  String get importingModel => 'Verificando archivo…';
+
+  @override
+  String modelImported(String label) {
+    return '$label importado';
+  }
+
+  @override
+  String get importNoMatch =>
+      'Este archivo no coincide con ningún modelo conocido';
+
+  @override
+  String get modelImportFailed => 'Error al importar';
+
+  @override
   String get transcribing => 'transcribiendo…';
 
   @override

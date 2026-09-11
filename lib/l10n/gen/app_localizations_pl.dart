@@ -217,6 +217,23 @@ class AppLocalizationsPl extends AppLocalizations {
       'podsumowanie kasety nie powiodło się — dotknij, aby ponowić';
 
   @override
+  String get importModel => 'Importuj z pliku';
+
+  @override
+  String get importingModel => 'Sprawdzanie pliku…';
+
+  @override
+  String modelImported(String label) {
+    return 'Zaimportowano: $label';
+  }
+
+  @override
+  String get importNoMatch => 'Ten plik nie pasuje do żadnego znanego modelu';
+
+  @override
+  String get modelImportFailed => 'Importowanie nie powiodło się';
+
+  @override
   String get transcribing => 'trwa transkrypcja…';
 
   @override

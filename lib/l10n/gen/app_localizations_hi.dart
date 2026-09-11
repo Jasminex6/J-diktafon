@@ -209,6 +209,23 @@ class AppLocalizationsHi extends AppLocalizations {
       'कैसेट का सारांश विफल — पुनः प्रयास हेतु टैप करें';
 
   @override
+  String get importModel => 'फ़ाइल से आयात करें';
+
+  @override
+  String get importingModel => 'फ़ाइल सत्यापित हो रही है…';
+
+  @override
+  String modelImported(String label) {
+    return '$label आयातित';
+  }
+
+  @override
+  String get importNoMatch => 'यह फ़ाइल किसी ज्ञात मॉडल से मेल नहीं खाती';
+
+  @override
+  String get modelImportFailed => 'आयात विफल';
+
+  @override
   String get transcribing => 'ट्रांसक्राइब हो रहा है…';
 
   @override

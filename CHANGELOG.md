@@ -6,6 +6,11 @@ correspond to git tags (`v*`); dates are tag dates.
 ## [Unreleased]
 
 ### Added
+- **Import models from a file** (Settings → Models) — both model pickers
+  gained an "Import from file" action: a model file already on the device
+  (a copy kept in Downloads, saved off a previous install, sideloaded) is
+  identified by its checksum and installed without any download. Reinstalls
+  and secondary installs no longer re-download gigabytes.
 - **Background playback with media controls** (Android/iOS) — playback now
   runs in a proper media session: a system media notification (Android) or
   lock-screen/Control Center controls (iOS) with play/pause, a seek bar

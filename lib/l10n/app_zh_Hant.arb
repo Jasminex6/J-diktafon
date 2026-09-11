@@ -55,6 +55,12 @@
   "summarizing": "正在產生摘要…",
   "summaryFailedRetry": "摘要失敗，點一下重試",
   "cassetteSummaryFailed": "卡帶摘要產生失敗 — 點按重試",
+  "importModel": "從檔案匯入",
+  "importingModel": "正在校驗檔案…",
+  "modelImported": "已匯入 {label}",
+  "@modelImported": {"placeholders": {"label": {"type": "String"}}},
+  "importNoMatch": "此檔案與任何已知模型都不相符",
+  "modelImportFailed": "匯入失敗",
   "transcribing": "轉錄中…",
 
   "settingsTitle": "設定",
