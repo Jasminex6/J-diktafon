@@ -226,6 +226,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get modelImportFailed => 'İçe aktarma başarısız';
 
   @override
+  String get importFromFolder => 'Klasörden içe aktar';
+
+  @override
+  String get folderNothingFound => 'Bu klasörde eşleşen model dosyası yok';
+
+  @override
   String get transcribing => 'yazıya dökülüyor…';
 
   @override

@@ -221,6 +221,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get modelImportFailed => 'Impor gagal';
 
   @override
+  String get importFromFolder => 'Impor dari folder';
+
+  @override
+  String get folderNothingFound =>
+      'Tidak ada berkas model yang cocok di folder ini';
+
+  @override
   String get transcribing => 'mentranskripsi…';
 
   @override

@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Este arquivo não corresponde a nenhum modelo conhecido",
   "modelImportFailed": "Falha na importação",
+  "importFromFolder": "Importar de pasta",
+  "folderNothingFound": "Nenhum arquivo de modelo correspondente nesta pasta",
   "transcribing": "transcrevendo…",
 
   "settingsTitle": "CONFIGURAÇÕES",

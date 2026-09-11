@@ -233,6 +233,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get modelImportFailed => 'Імпорт не вдався';
 
   @override
+  String get importFromFolder => 'Імпортувати з теки';
+
+  @override
+  String get folderNothingFound =>
+      'У цій теці немає відповідних файлів моделей';
+
+  @override
   String get transcribing => 'іде розшифровка…';
 
   @override

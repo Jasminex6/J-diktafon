@@ -227,6 +227,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get modelImportFailed => 'Échec de l’importation';
 
   @override
+  String get importFromFolder => 'Importer depuis un dossier';
+
+  @override
+  String get folderNothingFound =>
+      'Aucun fichier de modèle correspondant dans ce dossier';
+
+  @override
   String get transcribing => 'transcription en cours…';
 
   @override

@@ -227,6 +227,12 @@ class AppLocalizationsFa extends AppLocalizations {
   String get modelImportFailed => 'وارد کردن ناموفق بود';
 
   @override
+  String get importFromFolder => 'وارد کردن از پوشه';
+
+  @override
+  String get folderNothingFound => 'هیچ فایل مدل منطبقی در این پوشه نیست';
+
+  @override
   String get transcribing => 'در حال رونویسی…';
 
   @override

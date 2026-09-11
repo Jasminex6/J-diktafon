@@ -463,6 +463,18 @@ abstract class AppLocalizations {
   /// **'Import failed'**
   String get modelImportFailed;
 
+  /// No description provided for @importFromFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from folder'**
+  String get importFromFolder;
+
+  /// No description provided for @folderNothingFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching model files in this folder'**
+  String get folderNothingFound;
+
   /// No description provided for @transcribing.
   ///
   /// In en, this message translates to:

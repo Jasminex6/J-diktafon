@@ -224,6 +224,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get modelImportFailed => 'Import failed';
 
   @override
+  String get importFromFolder => 'Import from folder';
+
+  @override
+  String get folderNothingFound => 'No matching model files in this folder';
+
+  @override
   String get transcribing => 'transcribing…';
 
   @override

@@ -228,6 +228,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get modelImportFailed => 'Error al importar';
 
   @override
+  String get importFromFolder => 'Importar desde carpeta';
+
+  @override
+  String get folderNothingFound =>
+      'No hay archivos de modelos coincidentes en esta carpeta';
+
+  @override
   String get transcribing => 'transcribiendo…';
 
   @override

@@ -215,6 +215,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get modelImportFailed => '导入失败';
 
   @override
+  String get importFromFolder => '从文件夹导入';
+
+  @override
+  String get folderNothingFound => '此文件夹中没有匹配的模型文件';
+
+  @override
   String get transcribing => '正在转写…';
 
   @override
@@ -841,6 +847,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get modelImportFailed => '匯入失敗';
+
+  @override
+  String get importFromFolder => '從資料夾匯入';
+
+  @override
+  String get folderNothingFound => '此資料夾中沒有匹配的模型檔案';
 
   @override
   String get transcribing => '轉錄中…';

@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "لا يطابق هذا الملف أي نموذج معروف",
   "modelImportFailed": "فشل الاستيراد",
+  "importFromFolder": "استيراد من مجلد",
+  "folderNothingFound": "لا توجد ملفات نماذج مطابقة في هذا المجلد",
   "transcribing": "جارٍ التفريغ…",
 
   "settingsTitle": "الإعدادات",

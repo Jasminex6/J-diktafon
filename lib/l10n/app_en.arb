@@ -107,6 +107,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "This file does not match any known model",
   "modelImportFailed": "Import failed",
+  "importFromFolder": "Import from folder",
+  "folderNothingFound": "No matching model files in this folder",
   "transcribing": "transcribing…",
 
   "settingsTitle": "SETTINGS",

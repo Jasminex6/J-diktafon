@@ -113,6 +113,59 @@ Future<String?> pickModelDocument() async {
   }
 }
 
+/// Model-import folder (Android only): one SAF tree grant, valid for the
+/// calls made while the user's pick is being processed. Null = cancelled.
+Future<String?> pickModelsFolder() async {
+  if (!Platform.isAndroid) return null;
+  try {
+    return await _channel.invokeMethod<String>('pickModelsFolder');
+  } on PlatformException {
+    return null;
+  }
+}
+
+/// One entry of the granted model folder: a SAF document id (for staging)
+/// plus the metadata Dart filters candidates by.
+class FolderModelEntry {
+  const FolderModelEntry({required this.id, required this.name, required this.size});
+
+  final String id;
+  final String name;
+  final int size;
+}
+
+/// Lists the granted folder's files (Android only; empty on failure — the
+/// grant may have lapsed if the call arrives after the picker was closed).
+Future<List<FolderModelEntry>> listFolderModels(String treeUri) async {
+  if (!Platform.isAndroid) return const [];
+  try {
+    final rows = await _channel.invokeListMethod<Map<Object?, Object?>>(
+        'listFolderModels', {'tree': treeUri});
+    return [
+      for (final row in rows ?? const [])
+        FolderModelEntry(
+          id: row['documentId']! as String,
+          name: row['name']! as String,
+          size: row['size']! as int,
+        ),
+    ];
+  } on PlatformException {
+    return const [];
+  }
+}
+
+/// Streams one folder document into the import staging file and answers its
+/// path (Android only; null on failure — the caller reports the miss).
+Future<String?> stageFolderModel(String treeUri, String documentId) async {
+  if (!Platform.isAndroid) return null;
+  try {
+    return await _channel.invokeMethod<String>(
+        'stageFolderModel', {'tree': treeUri, 'documentId': documentId});
+  } on PlatformException {
+    return null;
+  }
+}
+
 /// Offers the OS "save document" dialog (SAF create-document on Android,
 /// export document picker on iOS) and lands the finished file at [sourcePath]
 /// wherever the user picked (Drive, Files, …). Returns false when the user

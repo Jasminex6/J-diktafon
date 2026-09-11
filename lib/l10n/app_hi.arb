@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "यह फ़ाइल किसी ज्ञात मॉडल से मेल नहीं खाती",
   "modelImportFailed": "आयात विफल",
+  "importFromFolder": "फ़ोल्डर से आयात करें",
+  "folderNothingFound": "इस फ़ोल्डर में कोई मिलान वाली मॉडल फ़ाइलें नहीं हैं",
   "transcribing": "ट्रांसक्राइब हो रहा है…",
 
   "settingsTitle": "सेटिंग्स",

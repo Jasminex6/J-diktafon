@@ -228,6 +228,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get modelImportFailed => 'Import fehlgeschlagen';
 
   @override
+  String get importFromFolder => 'Aus Ordner importieren';
+
+  @override
+  String get folderNothingFound =>
+      'Keine passenden Modelldateien in diesem Ordner';
+
+  @override
   String get transcribing => 'wird transkribiert…';
 
   @override

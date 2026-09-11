@@ -229,6 +229,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get modelImportFailed => 'Falha na importação';
 
   @override
+  String get importFromFolder => 'Importar de pasta';
+
+  @override
+  String get folderNothingFound =>
+      'Nenhum arquivo de modelo correspondente nesta pasta';
+
+  @override
   String get transcribing => 'transcrevendo…';
 
   @override

@@ -226,6 +226,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get modelImportFailed => 'आयात विफल';
 
   @override
+  String get importFromFolder => 'फ़ोल्डर से आयात करें';
+
+  @override
+  String get folderNothingFound =>
+      'इस फ़ोल्डर में कोई मिलान वाली मॉडल फ़ाइलें नहीं हैं';
+
+  @override
   String get transcribing => 'ट्रांसक्राइब हो रहा है…';
 
   @override

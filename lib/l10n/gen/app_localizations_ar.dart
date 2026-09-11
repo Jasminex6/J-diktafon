@@ -233,6 +233,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get modelImportFailed => 'فشل الاستيراد';
 
   @override
+  String get importFromFolder => 'استيراد من مجلد';
+
+  @override
+  String get folderNothingFound => 'لا توجد ملفات نماذج مطابقة في هذا المجلد';
+
+  @override
   String get transcribing => 'جارٍ التفريغ…';
 
   @override

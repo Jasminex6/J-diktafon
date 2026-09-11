@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Цей файл не відповідає жодній відомій моделі",
   "modelImportFailed": "Імпорт не вдався",
+  "importFromFolder": "Імпортувати з теки",
+  "folderNothingFound": "У цій теці немає відповідних файлів моделей",
   "transcribing": "іде розшифровка…",
 
   "settingsTitle": "НАЛАШТУВАННЯ",

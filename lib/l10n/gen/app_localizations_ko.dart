@@ -216,6 +216,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get modelImportFailed => '가져오기 실패';
 
   @override
+  String get importFromFolder => '폴더에서 가져오기';
+
+  @override
+  String get folderNothingFound => '이 폴더에 일치하는 모델 파일이 없습니다';
+
+  @override
   String get transcribing => '텍스트로 변환 중…';
 
   @override

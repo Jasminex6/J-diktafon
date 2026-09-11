@@ -222,6 +222,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get modelImportFailed => 'Nhập thất bại';
 
   @override
+  String get importFromFolder => 'Nhập từ thư mục';
+
+  @override
+  String get folderNothingFound =>
+      'Không có tệp mô hình khớp nào trong thư mục này';
+
+  @override
   String get transcribing => 'đang chép lời…';
 
   @override

@@ -228,6 +228,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get modelImportFailed => 'Import se nezdařil';
 
   @override
+  String get importFromFolder => 'Importovat ze složky';
+
+  @override
+  String get folderNothingFound =>
+      'V této složce nejsou žádné odpovídající soubory modelů';
+
+  @override
   String get transcribing => 'přepisuje se…';
 
   @override

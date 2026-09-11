@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "이 파일은 알려진 모델과 일치하지 않습니다",
   "modelImportFailed": "가져오기 실패",
+  "importFromFolder": "폴더에서 가져오기",
+  "folderNothingFound": "이 폴더에 일치하는 모델 파일이 없습니다",
   "transcribing": "텍스트로 변환 중…",
 
   "settingsTitle": "설정",

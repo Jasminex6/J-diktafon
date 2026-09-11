@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Bu dosya bilinen hiçbir modelle eşleşmiyor",
   "modelImportFailed": "İçe aktarma başarısız",
+  "importFromFolder": "Klasörden içe aktar",
+  "folderNothingFound": "Bu klasörde eşleşen model dosyası yok",
   "transcribing": "yazıya dökülüyor…",
 
   "settingsTitle": "AYARLAR",

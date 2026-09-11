@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Berkas ini tidak cocok dengan model mana pun",
   "modelImportFailed": "Impor gagal",
+  "importFromFolder": "Impor dari folder",
+  "folderNothingFound": "Tidak ada berkas model yang cocok di folder ini",
   "transcribing": "mentranskripsi…",
 
   "settingsTitle": "PENGATURAN",

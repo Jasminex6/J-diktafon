@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Этот файл не соответствует ни одной известной модели",
   "modelImportFailed": "Не удалось импортировать",
+  "importFromFolder": "Импортировать из папки",
+  "folderNothingFound": "В этой папке нет подходящих файлов моделей",
   "transcribing": "идёт расшифровка…",
 
   "settingsTitle": "НАСТРОЙКИ",

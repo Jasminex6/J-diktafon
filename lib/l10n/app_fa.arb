@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "این فایل با هیچ مدل شناخته‌شده‌ای مطابقت ندارد",
   "modelImportFailed": "وارد کردن ناموفق بود",
+  "importFromFolder": "وارد کردن از پوشه",
+  "folderNothingFound": "هیچ فایل مدل منطبقی در این پوشه نیست",
   "transcribing": "در حال رونویسی…",
 
   "settingsTitle": "تنظیمات",

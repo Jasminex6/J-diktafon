@@ -9,11 +9,13 @@ Fork build (Jasminex6): performance, background controls, summaries diagnostics 
 model import on top of upstream 1.0.9. Distributed as a sideloaded APK.
 
 ### Added
-- **Import models from a file** (Settings → Models) — both model pickers
-  gained an "Import from file" action: a model file already on the device
-  (a copy kept in Downloads, saved off a previous install, sideloaded) is
-  identified by its checksum and installed without any download. Reinstalls
-  and secondary installs no longer re-download gigabytes.
+- **Import models from a file or folder** (Settings → Models) — both model
+  pickers gained import actions: a model file already on the device (a copy
+  kept in Downloads, saved off a previous install, sideloaded) is
+  identified by its checksum and installed without any download, and
+  "Import from folder" restores every matching model from a backup folder
+  in one gesture. Reinstalls and secondary installs no longer re-download
+  gigabytes.
 - **Background playback with media controls** (Android/iOS) — playback now
   runs in a proper media session: a system media notification (Android) or
   lock-screen/Control Center controls (iOS) with play/pause, a seek bar

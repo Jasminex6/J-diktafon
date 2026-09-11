@@ -14,6 +14,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.provider.DocumentsContract
 import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.ryanheise.audioservice.AudioServiceActivity
@@ -34,6 +35,7 @@ class MainActivity : AudioServiceActivity() {
         // Outside the ranges Flutter plugins use for their own picks.
         const val SAVE_DOCUMENT_REQUEST = 7461
         const val IMPORT_DOCUMENT_REQUEST = 7462
+        const val MODELS_FOLDER_REQUEST = 7463
     }
 
     private val decodeExecutor = Executors.newSingleThreadExecutor()
@@ -116,6 +118,33 @@ class MainActivity : AudioServiceActivity() {
                     // the app on gigabyte models — this copies in 64 KB
                     // chunks. Answers the staged path, or null on cancel.
                     "importModelDocument" -> startImportDocument(result)
+                    // Model-import folder: one SAF tree grant covers every
+                    // model in the user's backup folder — Dart lists the
+                    // children, filters by size, and stages+verifies each
+                    // candidate through importModelDocument's choreography.
+                    "pickModelsFolder" -> startModelsFolderPick(result)
+                    "listFolderModels" -> {
+                        val treeUri = Uri.parse(call.argument<String>("tree")!!)
+                        Thread {
+                            try {
+                                mainHandler.post { result.success(listFolderModels(treeUri)) }
+                            } catch (e: Exception) {
+                                mainHandler.post { result.error("list_failed", e.message, null) }
+                            }
+                        }.start()
+                    }
+                    "stageFolderModel" -> {
+                        val treeUri = Uri.parse(call.argument<String>("tree")!!)
+                        val docId = call.argument<String>("documentId")!!
+                        Thread {
+                            try {
+                                mainHandler.post { result.success(
+                                    stageFolderModel(treeUri, docId)) }
+                            } catch (e: Exception) {
+                                mainHandler.post { result.error("copy_failed", e.message, null) }
+                            }
+                        }.start()
+                    }
                     // D13: microphone-type foreground service under a live
                     // capture — false (never an error) when the OS rejects
                     // the start; Dart then falls back to finalize-on-pause.
@@ -201,6 +230,66 @@ class MainActivity : AudioServiceActivity() {
      *  whose path Dart verifies (sha256) and installs. */
     private var pendingImportResult: MethodChannel.Result? = null
 
+    /** One SAF tree grant for the model-import folder ("Import from folder"):
+     *  the grant lives for this call only — Dart lists children and stages
+     *  candidates by document id while the URI is still answerable. */
+    private var pendingFolderResult: MethodChannel.Result? = null
+
+    private fun startModelsFolderPick(result: MethodChannel.Result) {
+        if (pendingFolderResult != null) {
+            result.error("busy", "another folder pick is in progress", null)
+            return
+        }
+        pendingFolderResult = result
+        try {
+            startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE),
+                MODELS_FOLDER_REQUEST)
+        } catch (e: Exception) {
+            pendingFolderResult = null
+            result.error("no_picker", e.message, null)
+        }
+    }
+
+    /** Children of the picked tree as {documentId, name, size} maps — Dart
+     *  filters by catalog sizes and stages only the candidates. */
+    private fun listFolderModels(treeUri: Uri): List<Map<String, Any>> {
+        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
+            treeUri, DocumentsContract.getTreeDocumentId(treeUri))
+        val out = mutableListOf<Map<String, Any>>()
+        contentResolver.query(
+            childrenUri,
+            arrayOf(
+                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                DocumentsContract.Document.COLUMN_SIZE,
+                DocumentsContract.Document.COLUMN_MIME_TYPE),
+            null, null, null)?.use { cursor ->
+            while (cursor.moveToNext()) {
+                if (cursor.getString(3) == DocumentsContract.Document.MIME_TYPE_DIR) {
+                    continue
+                }
+                val size = cursor.getLong(2)
+                if (size <= 0) continue
+                out.add(mapOf(
+                    "documentId" to cursor.getString(0),
+                    "name" to cursor.getString(1),
+                    "size" to size))
+            }
+        } ?: throw IOException("cannot query $treeUri")
+        return out
+    }
+
+    /** Streams one folder document into the import staging file (same slot
+     *  the single-document pick uses; imports are strictly sequential). */
+    private fun stageFolderModel(treeUri: Uri, documentId: String): String {
+        val docUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, documentId)
+        val staged = File(cacheDir, "imported_model")
+        contentResolver.openInputStream(docUri)?.use { input ->
+            staged.outputStream().use { output -> input.copyTo(output, 1 shl 16) }
+        } ?: throw IOException("cannot open $documentId")
+        return staged.absolutePath
+    }
+
     private fun startImportDocument(result: MethodChannel.Result) {
         if (pendingImportResult != null) {
             result.error("busy", "another import pick is in progress", null)
@@ -221,6 +310,17 @@ class MainActivity : AudioServiceActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == MODELS_FOLDER_REQUEST) {
+            val result = pendingFolderResult
+            pendingFolderResult = null
+            val uri = data?.data
+            if (result == null || resultCode != RESULT_OK || uri == null) {
+                result?.success(null) // user backed out of the dialog
+                return
+            }
+            result.success(uri.toString())
+            return
+        }
         if (requestCode == IMPORT_DOCUMENT_REQUEST) {
             val result = pendingImportResult
             pendingImportResult = null

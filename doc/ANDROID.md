@@ -39,8 +39,10 @@ Android sandboxes each app id into its own private storage, so a reinstall —
 or a debug build (`cz.mod42.diktafon.dev`) next to the store app — starts
 with an empty model store and would re-download gigabytes. To avoid that,
 keep a permanent copy of the model files in a folder on the phone (e.g.
-`Download/DiktafonModels`) and use the **"Import from file"** button at the
-bottom of both Settings model pickers:
+`Download/DiktafonModels`) and use the **"Import from folder"** button at
+the bottom of both Settings model pickers: one folder pick imports every
+matching model in one gesture ("Import from file" does the same for a
+single file):
 
 - The file is identified by its **checksum alone** — name and location don't
   matter; a wrong or corrupt file is rejected with a clear message.

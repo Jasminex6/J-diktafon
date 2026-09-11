@@ -215,6 +215,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get modelImportFailed => '読み込みに失敗しました';
 
   @override
+  String get importFromFolder => 'フォルダから取り込む';
+
+  @override
+  String get folderNothingFound => 'このフォルダに一致するモデルファイルはありません';
+
+  @override
   String get transcribing => '文字起こし中…';
 
   @override

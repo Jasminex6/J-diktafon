@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "此文件与任何已知模型都不匹配",
   "modelImportFailed": "导入失败",
+  "importFromFolder": "从文件夹导入",
+  "folderNothingFound": "此文件夹中没有匹配的模型文件",
   "transcribing": "正在转写…",
 
   "settingsTitle": "设置",

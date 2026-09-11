@@ -61,6 +61,8 @@
   "@modelImported": {"placeholders": {"label": {"type": "String"}}},
   "importNoMatch": "Tento soubor neodpovídá žádnému známému modelu",
   "modelImportFailed": "Import se nezdařil",
+  "importFromFolder": "Importovat ze složky",
+  "folderNothingFound": "V této složce nejsou žádné odpovídající soubory modelů",
   "transcribing": "přepisuje se…",
 
   "settingsTitle": "NASTAVENÍ",

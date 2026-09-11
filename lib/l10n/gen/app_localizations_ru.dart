@@ -234,6 +234,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get modelImportFailed => 'Не удалось импортировать';
 
   @override
+  String get importFromFolder => 'Импортировать из папки';
+
+  @override
+  String get folderNothingFound => 'В этой папке нет подходящих файлов моделей';
+
+  @override
   String get transcribing => 'идёт расшифровка…';
 
   @override
