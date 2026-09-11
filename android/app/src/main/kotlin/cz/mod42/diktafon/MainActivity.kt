@@ -20,6 +20,7 @@ import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.BufferedOutputStream
+import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
@@ -32,6 +33,7 @@ class MainActivity : AudioServiceActivity() {
     private companion object {
         // Outside the ranges Flutter plugins use for their own picks.
         const val SAVE_DOCUMENT_REQUEST = 7461
+        const val IMPORT_DOCUMENT_REQUEST = 7462
     }
 
     private val decodeExecutor = Executors.newSingleThreadExecutor()
@@ -108,6 +110,12 @@ class MainActivity : AudioServiceActivity() {
                     // creates. Answers false when the user backs out.
                     "saveDocument" -> startSaveDocument(call.argument("source"),
                         call.argument("name"), call.argument("mime"), result)
+                    // Model-import pick: stream the picked document into a
+                    // cache staging file. file_selector's Android openFile
+                    // materializes the whole document in RAM, which OOM-kills
+                    // the app on gigabyte models — this copies in 64 KB
+                    // chunks. Answers the staged path, or null on cancel.
+                    "importModelDocument" -> startImportDocument(result)
                     // D13: microphone-type foreground service under a live
                     // capture — false (never an error) when the OS rejects
                     // the start; Dart then falls back to finalize-on-pause.
@@ -188,32 +196,59 @@ class MainActivity : AudioServiceActivity() {
             SAVE_DOCUMENT_REQUEST)
     }
 
+    /** Model-import pick (see "importModelDocument" in configureFlutterEngine):
+     *  one SAF document at a time; the result streams to a cache staging file
+     *  whose path Dart verifies (sha256) and installs. */
+    private var pendingImportResult: MethodChannel.Result? = null
+
+    private fun startImportDocument(result: MethodChannel.Result) {
+        if (pendingImportResult != null) {
+            result.error("busy", "another import pick is in progress", null)
+            return
+        }
+        pendingImportResult = result
+        try {
+            startActivityForResult(
+                Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "*/*"
+                },
+                IMPORT_DOCUMENT_REQUEST)
+        } catch (e: Exception) {
+            pendingImportResult = null
+            result.error("no_picker", e.message, null)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == IMPORT_DOCUMENT_REQUEST) {
+            val result = pendingImportResult
+            pendingImportResult = null
+            val uri = data?.data
+            if (result == null || resultCode != RESULT_OK || uri == null) {
+                result?.success(null) // user backed out of the dialog
+                return
+            }
+            // Models are gigabytes — stream, never materialize in RAM.
+            Thread {
+                try {
+                    val staged = File(cacheDir, "imported_model")
+                    contentResolver.openInputStream(uri)?.use { input ->
+                        staged.outputStream().use { output ->
+                            input.copyTo(output, 1 shl 16)
+                        }
+                    } ?: throw IOException("cannot open $uri")
+                    mainHandler.post { result.success(staged.absolutePath) }
+                } catch (e: Exception) {
+                    mainHandler.post { result.error("copy_failed", e.message, null) }
+                }
+            }.start()
+            return
+        }
         if (requestCode != SAVE_DOCUMENT_REQUEST) {
             super.onActivityResult(requestCode, resultCode, data) // plugins' picks
             return
         }
-        val result = pendingSaveResult ?: return
-        val source = pendingSaveSource
-        pendingSaveResult = null
-        pendingSaveSource = null
-        val uri = data?.data
-        if (resultCode != RESULT_OK || uri == null || source == null) {
-            result.success(false) // user backed out of the dialog
-            return
-        }
-        // The archive can be large — copy it off the main thread.
-        Thread {
-            try {
-                contentResolver.openOutputStream(uri)?.use { out ->
-                    FileInputStream(source).use { it.copyTo(out) }
-                } ?: throw IOException("cannot open $uri")
-                mainHandler.post { result.success(true) }
-            } catch (e: Exception) {
-                mainHandler.post { result.error("save_failed", e.message, null) }
-            }
-        }.start()
-    }
 
     /** WAV facts the encoder needs; sizes derived from the file length, not
      *  the header fields (an interrupted capture leaves those stale). */

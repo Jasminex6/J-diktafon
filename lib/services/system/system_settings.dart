@@ -99,6 +99,20 @@ Future<void> stopRecordingForegroundService() async {
   }
 }
 
+/// Model-import pick: SAF open-document streamed to a cache staging file
+/// whose path is answered (see MainActivity's importModelDocument).
+/// file_selector's Android openFile materializes the whole document in RAM
+/// and OOM-kills the app on gigabyte models, so Android goes through this
+/// instead. Null = cancelled / no picker. Other platforms use file_selector.
+Future<String?> pickModelDocument() async {
+  if (!Platform.isAndroid) return null;
+  try {
+    return await _channel.invokeMethod<String>('importModelDocument');
+  } on PlatformException {
+    return null;
+  }
+}
+
 /// Offers the OS "save document" dialog (SAF create-document on Android,
 /// export document picker on iOS) and lands the finished file at [sourcePath]
 /// wherever the user picked (Drive, Files, …). Returns false when the user

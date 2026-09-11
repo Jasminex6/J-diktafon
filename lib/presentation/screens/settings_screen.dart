@@ -13,6 +13,7 @@ import '../../services/providers/model_manager.dart';
 import '../../services/providers/transcription_provider.dart';
 import '../../services/providers/whisper/whisper_model_manager.dart';
 import '../../services/system/device_ram.dart';
+import '../../services/system/system_settings.dart' show pickModelDocument;
 import '../theme/tape_colors.dart';
 import '../widgets/content_width.dart';
 import '../widgets/directional_chevrons.dart';
@@ -389,11 +390,11 @@ class ModelPickerDialog extends ConsumerWidget {
       WhisperModelManager manager) async {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
-    final file = await _pickModelFile(messenger);
-    if (file == null) return;
+    final sourcePath = await _pickModelPath(messenger);
+    if (sourcePath == null) return;
     messenger.showSnackBar(SnackBar(content: Text(l10n.importingModel)));
     try {
-      final model = await manager.importFromFile(file.path);
+      final model = await manager.importFromFile(sourcePath);
       if (model == null) {
         messenger.showSnackBar(SnackBar(content: Text(l10n.importNoMatch)));
         return;
@@ -404,6 +405,8 @@ class ModelPickerDialog extends ConsumerWidget {
       await ref.read(jobQueueProvider).drain();
     } catch (_) {
       messenger.showSnackBar(SnackBar(content: Text(l10n.modelImportFailed)));
+    } finally {
+      await _deleteStagedPick(sourcePath);
     }
   }
 
@@ -476,11 +479,11 @@ class LlmModelPickerDialog extends ConsumerWidget {
       BuildContext context, WidgetRef ref, LlmModelManager manager) async {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
-    final file = await _pickModelFile(messenger);
-    if (file == null) return;
+    final sourcePath = await _pickModelPath(messenger);
+    if (sourcePath == null) return;
     messenger.showSnackBar(SnackBar(content: Text(l10n.importingModel)));
     try {
-      final model = await manager.importFromFile(file.path);
+      final model = await manager.importFromFile(sourcePath);
       if (model == null) {
         messenger.showSnackBar(SnackBar(content: Text(l10n.importNoMatch)));
         return;
@@ -493,6 +496,8 @@ class LlmModelPickerDialog extends ConsumerWidget {
       await ref.read(jobQueueProvider).drain();
     } catch (_) {
       messenger.showSnackBar(SnackBar(content: Text(l10n.modelImportFailed)));
+    } finally {
+      await _deleteStagedPick(sourcePath);
     }
   }
 
@@ -526,16 +531,35 @@ class LlmModelPickerDialog extends ConsumerWidget {
 
 /// SAF/file pick for the import affordance: any file goes — the checksum
 /// decides which model it is, so extensions stay unfiltered.
-Future<XFile?> _pickModelFile(ScaffoldMessengerState messenger) async {
+/// Resolves a picked model file's path. Android streams the SAF document
+/// into a cache staging file through the platform channel (file_selector's
+/// openFile materializes the whole document in RAM and OOM-kills the app on
+/// gigabyte models); everywhere else file_selector's path is direct.
+Future<String?> _pickModelPath(ScaffoldMessengerState messenger) async {
+  if (Platform.isAndroid) {
+    return pickModelDocument();
+  }
   try {
-    return await openFile(acceptedTypeGroups: const [
+    final file = await openFile(acceptedTypeGroups: const [
       XTypeGroup(label: 'model'),
     ]);
+    return file?.path;
   } catch (_) {
     // The picker itself failed (no file app responded, plugin hiccup).
-    // messenger is still mounted here — the dialog stays open underneath.
     return null;
   }
+}
+
+/// Removes the Android cache staging file after a finished import — the
+/// manager copied the verified bytes into its own store; gigabytes of
+/// staging must not linger. Silently keeps going on any failure.
+Future<void> _deleteStagedPick(String path) async {
+  if (!Platform.isAndroid) return;
+  if (!path.endsWith('imported_model')) return; // only our staging file
+  try {
+    final staged = File(path);
+    if (await staged.exists()) await staged.delete();
+  } catch (_) {}
 }
 Future<void> downloadAndDrain(
   ScaffoldMessengerState messenger,
