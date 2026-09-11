@@ -249,6 +249,27 @@ class MainActivity : AudioServiceActivity() {
             super.onActivityResult(requestCode, resultCode, data) // plugins' picks
             return
         }
+        val result = pendingSaveResult ?: return
+        val source = pendingSaveSource
+        pendingSaveResult = null
+        pendingSaveSource = null
+        val uri = data?.data
+        if (resultCode != RESULT_OK || uri == null || source == null) {
+            result.success(false) // user backed out of the dialog
+            return
+        }
+        // The archive can be large — copy it off the main thread.
+        Thread {
+            try {
+                contentResolver.openOutputStream(uri)?.use { out ->
+                    FileInputStream(source).use { it.copyTo(out) }
+                } ?: throw IOException("cannot open $uri")
+                mainHandler.post { result.success(true) }
+            } catch (e: Exception) {
+                mainHandler.post { result.error("save_failed", e.message, null) }
+            }
+        }.start()
+    }
 
     /** WAV facts the encoder needs; sizes derived from the file length, not
      *  the header fields (an interrupted capture leaves those stale). */
