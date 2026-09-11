@@ -53,6 +53,20 @@ bottom of both Settings model pickers:
 Whisper models are `.bin` ggml files (e.g. `ggml-small.bin`); summary
 models are `.gguf` (e.g. `Qwen3-1.7B-Q8_0.gguf`).
 
+> Files pushed onto the phone with `adb push` bypass Android's media index,
+> and the system file picker (used by "Import from file") only lists
+> indexed entries — the folder looks empty even though the files are there.
+> Index them once:
+>
+> ```sh
+> adb shell content call --uri content://media --method scan_volume \
+>   --arg external_primary
+> ```
+>
+> (or move/re-save the files through the phone's own Files app). Verify with
+> `adb shell content query --uri content://media/external/file --projection
+> _display_name --where "_display_name LIKE 'ggml%'"`.
+
 ### Reading the logs
 
 Everything below is visible in `adb logcat` (all build types):
